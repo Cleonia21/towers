@@ -13,12 +13,32 @@
 
 #include "towers.h"
 
+struct rectangle {
+    int y;
+    int x;
+    int width;
+    int height;
+
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    uint8_t a;
+};
+
+struct line {
+    int x1;
+    int y1;
+    int x2;
+    int y2;
+};
+
 class Map {
 public:
     Map(int width, int height);
-    void init(SDL_Renderer* _render);
+    void init();
 
-    void draw();
+    std::vector<rectangle> getTowers();
+    line getLine();
     void mouseDown(int x, int y);
 
     ~Map();
@@ -31,14 +51,19 @@ private:
         double y;
     };
 
-    void drawLine();
-
     void printMap();
+    void printPoint(point p);
     void calculatingTowerSize();
-    unsigned int getHeight();
+    unsigned int getLength();
     void fillMap();
+
+
+
+    std::vector<point> diagonally(point p1, point p2);
+    std::vector<point> squaresOnLine(point p1, point p2);
+
+    void sortPointsForX(point *a, point *b);
     double getY(point p1, point p2, double x);
-    std::vector<point> setOfSquares(point p1, point p2);
     bool visibility(point a, point b);
 
 
@@ -46,8 +71,6 @@ private:
     const int width, height;
     int towerWidth;
     int towerHeight;
-
-    SDL_Renderer* render;
 
     int mxFirst, myFirst, mxSecond, mySecond;
 };

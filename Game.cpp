@@ -37,7 +37,7 @@ void Game::init() {
     if( render == nullptr )
         throw std::runtime_error("Renderer could not be created! SDL Error: " + std::string(SDL_GetError()));
 
-    map->init(render);
+    map->init();
 }
 
 void Game::startGame() {
@@ -71,7 +71,16 @@ void Game::startGame() {
         SDL_SetRenderDrawColor(render, 0, 0, 0, 0xFF);
         SDL_RenderClear(render);
 
-        map->draw();
+        auto towers = map->getTowers();
+        auto line = map->getLine();
+
+        for (auto &&t : towers) {
+            SDL_SetRenderDrawColor(render, t.r, t.g, t.b, t.a);
+            SDL_Rect rect = {t.x, t.y, t.width, t.height};
+            SDL_RenderFillRect(render, &rect);
+        }
+        SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
+        SDL_RenderDrawLine(render, line.x1, line.y1, line.x2, line.y2);
 
         SDL_RenderPresent(render);
     }

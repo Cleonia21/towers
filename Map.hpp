@@ -10,6 +10,7 @@
 #include <vector>
 #include <iostream>
 #include <random>
+#include <cmath>
 
 #include "towers.h"
 
@@ -32,38 +33,50 @@ struct line {
     int y2;
 };
 
+struct point {
+    double x;
+    double y;
+
+    void round();
+    point round(point);
+    void print() const;
+};
+
 class Map {
 public:
+    using row = std::vector<unsigned int>;
+    using map = std::vector<row>;
+
     Map(int width, int height);
     void init();
 
     std::vector<rectangle> getTowers();
-    line getLine();
+    line getLine() const;
     void mouseDown(int x, int y);
+
+    unsigned int fieldLength(point p);
 
     ~Map();
 private:
-    using row = std::vector<unsigned int>;
-    using map = std::vector<row>;
-
-    struct point {
-        double x;
-        double y;
+    struct segment {
+        point p1;
+        point p2;
     };
 
     void printMap();
-    void printPoint(point p);
     void calculatingTowerSize();
-    unsigned int getLength();
+    static unsigned int getLength();
     void fillMap();
 
 
-
-    std::vector<point> diagonally(point p1, point p2);
+    static point intersection(segment s1, segment s2);
+    point* intersectionPoints(segment primary, point squarePoint);
+    point outputOfSegmentFromSquare(segment primary, point squarePoint);
+    static void centering(point *a, point *b);
     std::vector<point> squaresOnLine(point p1, point p2);
 
-    void sortPointsForX(point *a, point *b);
-    double getY(point p1, point p2, double x);
+    double angleTG(point p1, point p2);
+    bool calculateVisibility(point p1, point p2, std::vector<point>);
     bool visibility(point a, point b);
 
 

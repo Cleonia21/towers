@@ -5,14 +5,15 @@
 #ifndef TOWERS_MAP_HPP
 #define TOWERS_MAP_HPP
 
-#include <SDL2/SDL.h>
-
 #include <vector>
 #include <iostream>
 #include <random>
 #include <cmath>
+#include <algorithm>
 
 #include "towers.h"
+#include "map/Point.hpp"
+#include "map/Line.hpp"
 
 struct rectangle {
     int y;
@@ -26,22 +27,6 @@ struct rectangle {
     uint8_t a;
 };
 
-struct line {
-    int x1;
-    int y1;
-    int x2;
-    int y2;
-};
-
-struct point {
-    double x;
-    double y;
-
-    void round();
-    point round(point);
-    void print() const;
-};
-
 class Map {
 public:
     using row = std::vector<unsigned int>;
@@ -51,17 +36,19 @@ public:
     void init();
 
     std::vector<rectangle> getTowers();
-    line getLine() const;
+    Line getLine() const;
     void mouseDown(int x, int y);
 
-    unsigned int fieldLength(point p);
+    unsigned int fieldLength(Point p);
 
     ~Map();
 private:
     struct segment {
-        point p1;
-        point p2;
+        Point p1;
+        Point p2;
     };
+
+
 
     void printMap();
     void calculatingTowerSize();
@@ -69,23 +56,20 @@ private:
     void fillMap();
 
 
-    static point intersection(segment s1, segment s2);
-    point* intersectionPoints(segment primary, point squarePoint);
-    point outputOfSegmentFromSquare(segment primary, point squarePoint);
-    static void centering(point *a, point *b);
-    std::vector<point> squaresOnLine(point p1, point p2);
+    static Point intersection(segment s1, segment s2);
+    Point* intersectionPoints(segment primary, Point squarePoint);
+    Point outputOfSegmentFromSquare(segment primary, Point squarePoint);
+    std::vector<Point> squaresOnLine(Point p1, Point p2);
 
-    double angleTG(point p1, point p2);
-    bool calculateVisibility(point p1, point p2, std::vector<point>);
-    bool visibility(point a, point b);
-
+    double angleTG(Point p1, Point p2);
+    bool calculateVisibility(Point p1, Point p2, std::vector<Point>);
+    bool visibility();
 
     map field;
     const int width, height;
     int towerWidth;
     int towerHeight;
-
-    int mxFirst, myFirst, mxSecond, mySecond;
+    Line line;
 };
 
 

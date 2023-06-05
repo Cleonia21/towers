@@ -11,12 +11,14 @@
 #include <string>
 #include <exception>
 
-#include <SDL2/SDL.h>
+#include </usr/local/include/SDL2/SDL.h>
 //#include <SDL2/SDL_image.h>
 
 #include "towers.h"
 
 #include "Map.hpp"
+#include "map/Point.hpp"
+#include "map/Line.hpp"
 
 class Game {
 public:
@@ -37,6 +39,9 @@ private:
     //Variables needed to draw and display the window
     SDL_Window* window;
     SDL_Renderer* render;
+
+    int towerWidth;
+    int towerHeight;
 
     Map *map;
 };

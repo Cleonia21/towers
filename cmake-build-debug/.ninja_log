@@ -1,4 +1,6 @@
 # ninja log v5
-4	2726	1685386794213616001	CMakeFiles/towers.dir/main.cpp.o	e747810db961280c
-2727	2856	1685386794353373868	towers	d38635d1bda6007f
-11	1914	1685460660578012770	CMakeFiles/towers.dir/Map.cpp.o	9c2fd0efad4516d0
+3	2627	1685958428718664242	CMakeFiles/towers.dir/main.cpp.o	e747810db961280c
+6	2329	1685958191028782051	CMakeFiles/towers.dir/Map.cpp.o	9c2fd0efad4516d0
+5	1410	1685958427508691411	CMakeFiles/towers.dir/map/Line.cpp.o	43b63e5cdaefb333
+1411	2680	1685958428780787714	CMakeFiles/towers.dir/map/Point.cpp.o	10c2654df30f5249
+4	2713	1685958428810223994	CMakeFiles/towers.dir/Game.cpp.o	236503dd3b02f8b9

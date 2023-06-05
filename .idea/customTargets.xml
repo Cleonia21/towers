@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CLionExternalBuildManager">
+    <target id="0f3588a4-a138-4771-93dd-4b7f79125748" name="Towers" defaultType="TOOL">
+      <configuration id="39d6d8a5-11d1-48e6-9ce8-b7a9441454e0" name="Towers">
+        <build type="TOOL">
+          <tool actionId="Tool_External Tools_Towers" />
+        </build>
+      </configuration>
+    </target>
+  </component>
+</project>
